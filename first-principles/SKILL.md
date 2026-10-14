@@ -113,6 +113,8 @@ When the judge replies:
 
 ## Final output
 
+If the `tldr` skill is available, read its SKILL.md and follow its writing rules: simple English, no invented terms, and short bullets. Ignore its section list. Use the sections below instead, and keep the tables as tables.
+
 ```
 ## First Principles Analysis: [topic]
 **Goal:** ...
