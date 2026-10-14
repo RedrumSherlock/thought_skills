@@ -43,3 +43,7 @@ To install for one project only, link into `<project>/.claude/skills/` instead o
 
 1. Create a folder named after the skill, with a `SKILL.md` that has `name` and `description` in its frontmatter.
 2. Add a row to the table above.
+
+## License
+
+[MIT](LICENSE)
