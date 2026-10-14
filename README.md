@@ -7,6 +7,7 @@ Agent skills for structured thinking. Each folder is one skill with its own `SKI
 | Skill | What it does | How to run |
 |-------|--------------|------------|
 | [first-principles](first-principles/SKILL.md) | Analyzes a statement, question, or design from first principles: defines the real goal, keeps only proven facts, reasons or builds from those facts, then has an independent sub-agent judge the work. | `/first-principles <statement>` |
+| [tldr](tldr/SKILL.md) | Rewrites the previous output, or the given text, as a short plain-English summary: a tl;dr first, then bulleted sections of one-to-two-line points, no made-up terms. Important process details move to an appendix. Use when the last summary is too long. | `/tldr [text]` |
 
 ## Install
 
