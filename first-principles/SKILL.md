@@ -12,33 +12,35 @@ Input: $ARGUMENTS
 
 Run the four steps in order. Do not skip a step.
 
+**You, the agent, do all four steps yourself. Never hand a step to the user.**
+
 ## Step 1: Define the real goal
 
 People often ask about the method they have in mind (X) when what they need is a goal (Y). This is the XY problem. Find Y.
 
 1. Restate the ask in one sentence.
 2. Ask "why?" until you reach the outcome itself, not a way to get it. What is the job to be done? If the current system did not exist, what would actually be needed?
-3. Ask if the requirement should exist at all. Try deleting it: what happens if we just don't do this? The worst mistake is to optimize something that should not exist.
+3. Ask if the requirement should exist at all. Try deleting it: what happens if we just don't do this?
 4. Write success criteria: how we will know the goal is met.
 5. List the must-haves the user stated. Keep them; do not swap in your own.
 
-**Gate:** if any part of the goal is a guess, ask the user and wait. Do not go on until the goal is clear.
-
 ## Step 2: Collect only facts
 
-List every claim the ask rests on, stated or hidden. Most asks carry several hidden ones. A claim is a fact only if it has one of these kinds of evidence:
+List every claim the ask rests on, stated or hidden. Most asks carry several hidden ones. Treat any context given in the conversation the same way: it is an assumption until proven. A claim is a fact only if it has one of these kinds of evidence:
 
 - **Logic, math, definitions, or laws of physics.**
 - **Direct observation:** something measured, run, or read in the real code, data, or logs.
 - **Published science:** a peer-reviewed study. Cite the original paper, not a summary of it.
 - **Official numbers:** recent figures from an authoritative body, such as a national statistics office or a standards body.
-- **The user's confirmed goal and must-haves** from Step 1.
+- **The goal and must-haves** from Step 1.
 
 These are **not** evidence: blog posts, forums, "best practice", "industry standard", "everyone uses X", what other companies do, market prices taken as a cost floor, and numbers from memory.
 
 For published or official numbers, read the original source and check that it is not misrepresented. The date, unit, scope (what was measured, where, on whom), and definitions must match how we use it. Old numbers are snapshots, not current facts. Quote the source.
 
 Test each fact: Is it proven, not just commonly believed? Would breaking it really cause failure? Stop breaking a fact down once it is proven; going deeper adds nothing.
+
+If a fact holds in normal conditions but could fail in extreme ones (a black swan event, a rare edge case), keep it and add it to the risk list. These risks are acceptable, but they must be listed.
 
 | ID | Fact | Evidence (source, date) |
 |----|------|-------------------------|
@@ -94,13 +96,20 @@ You may look up sources to verify them.
 3. Gaps: Was any fact, constraint, or option ignored that would change the result?
 4. Result: Does it meet the goal and success criteria?
 
-Return each issue as: [item ID] problem → fix.
-End with PASS or FAIL.
+Return each issue as: [item ID] MAJOR or MINOR: problem → fix.
+MAJOR: the result depends on it (a wrong goal, a wrong or unproven fact,
+a broken step, or a missed fact that would change the result).
+MINOR: it does not change the result.
+End with PASS (no MAJOR issues) or FAIL.
 
 [analysis]
 ```
 
-Fix every issue, then run a new judge. Stop when it returns PASS or after two rounds. Report any issue still open.
+When the judge replies:
+
+- **MAJOR issue:** go back to Step 2, or to Step 1 if the goal was wrong, and redo the steps from there. Then run a new judge. Repeat until the judge finds no MAJOR issue.
+- **MINOR issue:** fix it directly. No need to redo the steps.
+- Add any issue you cannot fix to the risk list.
 
 ## Final output
 
@@ -108,11 +117,13 @@ Fix every issue, then run a new judge. Stop when it returns PASS or after two ro
 ## First Principles Analysis: [topic]
 **Goal:** ...
 **Success criteria:** ...
-**Facts:** [F table]
-**Unproven:** [table]
-**Reasoning / Build:** [chain or layer table]
 **Result:** ...
-**Differs from the usual answer because:** ...
+**Risk:** [issues the judge raised that could not be fixed, and facts that
+could fail under extreme conditions such as a black swan event]
+
+### Appendix
+**Facts:** [F table]
+**Reasoning / Build:** [chain or layer table]
+**Unproven:** [table]
 **Test that could prove it wrong:** ...
-**Judge:** PASS, or the open issues
 ```
