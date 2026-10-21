@@ -8,6 +8,7 @@ Agent skills for structured thinking. Each folder is one skill with its own `SKI
 |-------|--------------|------------|
 | [first-principles](first-principles/SKILL.md) | Analyzes a statement, question, or design from first principles: defines the real goal, keeps only proven facts, reasons or builds from those facts, then has an independent sub-agent judge the work. | `/first-principles <statement>` |
 | [ml-scientist](ml-scientist/SKILL.md) | Runs ML and deep-learning work as research. It observes the data, reasons, states a hypothesis, tests it with training and validation, explains the result, and repeats. When progress stops, it searches for the best published methods for the same problem. A simple model is only a baseline. An independent judge checks the work. | Loads on its own during ML work, or `/ml-scientist <task>` |
+| [signal-noise](signal-noise/SKILL.md) | Sorts the data collected during research into evidence and noise for one hypothesis, based on Nate Silver's *The Signal and the Noise*. It traces each item to its original source, drops items that do not change the odds, tests which items show cause and effect, updates how likely the hypothesis is, and has an independent sub-agent judge the result. | `/signal-noise <hypothesis>` |
 | [tldr](tldr/SKILL.md) | Rewrites the previous output, or the given text, as a short plain-English summary: a tl;dr first, then bulleted sections of one-to-two-line points, no made-up terms. Important process details move to an appendix. Use when the last summary is too long. | `/tldr [text]` |
 
 ## Install
